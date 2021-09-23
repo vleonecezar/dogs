@@ -10,7 +10,7 @@ const Feed = ({ user }) => {
 
   React.useEffect(() => {
     function infiniteScroll(event) {
-      if (infinite) {
+      if (infinite && !modalPhoto) {
         let wait = false;
         const scroll = window.scrollY;
         const height = document.body.offsetHeight - window.innerHeight;
@@ -33,7 +33,7 @@ const Feed = ({ user }) => {
       window.removeEventListener("wheel", infiniteScroll);
       window.removeEventListener("scroll", infiniteScroll);
     };
-  }, [infinite]);
+  }, [infinite, modalPhoto]);
 
   return (
     <div>

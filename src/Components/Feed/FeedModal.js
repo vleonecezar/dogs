@@ -12,10 +12,23 @@ const FeedModal = ({ photo, setModalPhoto }) => {
   React.useEffect(() => {
     const { url, options } = PHOTO_GET(photo.id);
     request(url, options);
+    noScroll();
+    return () => noScroll();
   }, [photo, request]);
 
+  function noScroll() {
+    document.body.classList.toggle("noScroll");
+    document.body.style.overflow = "initial";
+
+    if (document.body.className === "noScroll") {
+      document.body.style.overflow = "hidden";
+    }
+  }
+
   function handleOutsideClick(event) {
-    if (event.target === event.currentTarget) setModalPhoto(null);
+    if (event.target === event.currentTarget) {
+      setModalPhoto(null);
+    }
   }
 
   return (
